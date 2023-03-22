@@ -23,6 +23,7 @@ class LoginController extends Controller
                 $request->session()->put('password',$request->password);
 
                 return redirect()->route('layout.default');
+                //return redirect()->route('user.index');
             }
             else{
                 $request->session()->flash('error','enter valid mobile number or password');

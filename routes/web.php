@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use  App\Http\Controllers\LoginController;
 use App\Http\Controllers\logoutController;
+use App\Http\Controllers\UserController;
 
 
 /*
@@ -25,6 +26,12 @@ route::view('login','login');
 Route::get('index',[LoginController::class,'index'])->name('login.index');
 Route::post('checking',[LoginController::class,'check'])->name('login.check');
 Route::get('logout',[logoutController::class,'logout'])->name('user.logout');
+Route::view('user_list','user')->name('user.list');
+//Route::view('user_list','user');
+Route::resource('user',UserController::class);
+//Route::get('user',[UserController::class,'index'])->name('user.index');
+//Route::post('user_store',[UserController::class,'store'])->name('user.store');
+
 
 Route::get('dashboard',[AdminController::class,'dashboard'])->name('dashboard');
 

@@ -13,6 +13,7 @@
 
     <!-- Custom fonts for this template-->
     <link href="{{ url('asset/vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css">
     <link
         href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
         rel="stylesheet">
@@ -126,7 +127,7 @@
 
     <!-- Page Wrapper -->
     <div id="wrapper">
-   < @include('layouts.sidebar')
+      @include('layouts.sidebar')
         <!-- Content Wrapper -->
         <div id="content-wrapper" class="d-flex flex-column">
 
@@ -136,6 +137,106 @@
                  @include('layouts.header')
     
                  @yield('content')
+
+                 <div class="container">
+                  <div class="d-flex justify-content-between pb-2">
+                    <div class="h4">User list</div> 
+                    <div><a href="" class="btn btn-primary" id="add_user" data-bs-toggle="modal" data-bs-target="#exampleModal">Add User</a></div>
+                  </div>
+                    <table id="user_table" class="table table-bordered data-table">
+                      <thead>
+                              <tr>
+                                  <th>First Name</th>
+                                  <th>Last Name</th>
+                                  <th>email</th>
+                                  <th>Mobile</th>
+                                  <th>Role id</th>
+                                  <th>password</th>
+                                 <!-- <th>status</th>
+                                  <th>created by</th>
+                                  <th>modified by</th>
+                                  <th>created at</th>
+                                  <th>modified at</th>
+                                  <th>actions</th>-->
+                              </tr>
+                      </thead>
+                      <tbody>
+                    
+                      </tbody>
+                    </table>
+                </div>
+                <!--user table-->
+                <!-- Button trigger modal -->
+                <!-- Modal -->
+                <form action="#" method="post" id="registration_model">
+                  @csrf
+                  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5 class="modal-title text-dark" id="exampleModalLabel">Add User</h5>
+                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                          <div class="mb-2">
+                              <label for="first_name" class="form-label">Enter First Name</label>
+                              <input type="text" name="first_name" id="first_name" class="form-control @error('first_name') is-invalid @enderror" value="{{old('first_name')}}">
+                              @error('first_name')
+                                <p class="invalid-feedback">{{$message}}</p>
+                              @enderror
+                          </div>
+                          <div class="mb-2">
+                            <label for="last_name" class="form-label">Enter Last name</label>
+                            <input type="text" name="last_name" id="last_name" class="form-control @error('last_name') is-invalid @enderror" value="{{old('last_name')}}">
+                            @error('last_name')
+                              <p class="invalid-feedback">{{$message}}</p>
+                            @enderror
+                          </div>
+                          <div class="mb-2">
+                              <label for="email" class="form-label">email</label>
+                              <input type="text" name="email" id="email" class="form-control @error('email') is-invalid @enderror" value="{{old('email')}}">
+                              @error('email')
+                                  <p class="invalid-feedback">{{$message}}</p>
+                              @enderror
+                          </div>
+                          <div class="mb-2">
+                            <label for="mobile" class="form-label">mobile</label>
+                            <input type="text" name="mobile" id="mobile" class="form-control @error('mobile') is-invalid @enderror" value="{{old('mobile')}}">
+                            @error('mobile')
+                              <p class="invalid-feedback">{{$message}}</p>
+                            @enderror
+                          </div>
+                          <div class="mb-2">
+                            <label for="roll_id" class="form-label">roll id</label>
+                            <input type="text" name="roll_id" id="roll_id" class="form-control @error('roll_id') is-invalid @enderror" value="{{old('roll_id')}}">
+                            @error('roll_id')
+                              <p class="invalid-feedback">{{$message}}</p>
+                            @enderror
+                          </div>
+                          <div class="mb-2">
+                            <label for="password" class="form-label">Password</label>
+                            <input type="text" name="password" id="password" class="form-control @error('password') is-invalid @enderror" value="{{old('password')}}">
+                            @error('password')
+                              <p class="invalid-feedback">{{$message}}</p>
+                            @enderror
+                          </div>
+                        </div>
+                        <div class="mb-2">
+                            <label for="status" class="form-label">status</label>
+                            <input type="text" name="status" id="status" class="form-control @error('status') is-invalid @enderror" value="{{old('status')}}">
+                            @error('status')
+                              <p class="invalid-feedback">{{$message}}</p>
+                            @enderror
+                          </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                          <button class="btn btn-primary" type="submit">Add user</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </form>
+                <!--model end-->
             </div>
             
         </div>
@@ -148,7 +249,9 @@
 
  
     <!-- Bootstrap core JavaScript-->
-  <script src="{{ url('asset/vendor/jquery/jquery.min.js') }}"></script>
+    <script src="{{ asset('user_assets/js/jquery-3.6.0.min.js') }}"></script>
+    <script src="{{ asset('user_assets/js/bootstrap.bundle.min.js') }}"></script>
+    <script src="{{ url('asset/vendor/jquery/jquery.min.js') }}"></script>
     <script src="{{ url('asset/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js" integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
@@ -192,6 +295,7 @@
             <script src="{{ asset('asset/js/jquery.nstSlider.min.js') }}"></script>
             <!-- Main Js -->
             <script src="{{ asset('asset/js/functions.js') }}"></script>
+            <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
 
             <script>
                 var url = "{{ url('/') }}";
@@ -440,6 +544,47 @@
          }
       });
   });
+
+//user list display
+$.ajaxSetup({
+      headers:{
+        'X-CSRF-TOKEN':$('meta[name="csrf-token"]').attr('content')
+      }
+    });
+  $(function(){
+      $('#user_table').DataTable( {
+      "ajax": {
+        "url": "{{ route('user.index') }}",
+            "type": "POST",
+            'data': function (d) {
+                    d._token = $("input[name=_token]").val();
+
+                },
+            "dataSrc": ""
+        },
+        "columns": [
+          { "data": "First Name" },
+          { "data": "Last Name" },
+          { "data": "email" },
+          { "data": "Mobile" },
+          { "data": "Role id" },
+          { "data": "password" }
+        ]
+  });
+});
+
+//registation
+$('#registration_model').submit(function(e){
+    var data=new FormData(this);
+    $.ajax({
+        url:"{{route('user.store')}}",
+        data:data,
+        cache: false,
+        contentType: false,
+        processData: false,
+        type: 'POST',
+    });
+});
 </script>
 
 </body>
